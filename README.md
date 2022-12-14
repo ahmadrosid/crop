@@ -12,6 +12,12 @@ Flags:
       --size ints      Set image size: width x height (default [0,0])
 ```
 
+## Installation
+
+```bash
+go install github.com/ahmadrosid/crop@latest
+```
+
 ## Example
 
 ```bash
