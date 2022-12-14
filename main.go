@@ -15,6 +15,7 @@ type SubImager interface {
 
 var size []int
 var padding []int
+var outputFolder string
 
 func main() {
 	var rootCmd = &cobra.Command{
@@ -26,6 +27,7 @@ func main() {
 
 	rootCmd.PersistentFlags().IntSliceVar(&size, "size", []int{0, 0}, "Set image size: width x height")
 	rootCmd.PersistentFlags().IntSliceVar(&padding, "padding", []int{0, 0}, "Set padding left and top")
+	rootCmd.PersistentFlags().StringVar(&outputFolder, "out-folder", "output", "Output folder name.")
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintf(os.Stderr, "There was an error while executing CLI '%s'", err)
@@ -86,7 +88,6 @@ func cropImage(path string) {
 	cropSize = cropSize.Add(paddingSize)
 	croppedImage := originalImage.(SubImager).SubImage(cropSize)
 
-	outputFolder := "output/"
 	if _, err := os.Stat(outputFolder); os.IsNotExist(err) {
 		os.Mkdir(outputFolder, 0o755)
 	}
