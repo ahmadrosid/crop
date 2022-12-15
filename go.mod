@@ -1,4 +1,4 @@
-module crop
+module github.com/ahmadrosid/crop
 
 go 1.19
 
